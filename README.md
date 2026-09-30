@@ -1,22 +1,20 @@
-# 👾 Minha Jornada em Cibersegurança | TryHackMe Writeups
+#  Offensive Security & Penetration Testing | TryHackMe Writeups
 
-Olá! Bem-vindo(a) ao meu repositório de estudos práticos.
+Este repositório consolida minhas metodologias de testes de invasão e exploração aplicadas a cenários do [TryHackMe](https://tryhackme.com). 
 
-Criei este espaço para documentar meu progresso, meus erros e, principalmente, o que venho aprendendo enquanto resolvo as máquinas e trilhas do [TryHackMe](https://tryhackme.com). 
+O objetivo principal deste projeto é documentar vetores de ataque, refinar técnicas avançadas de exploração e fornecer um material de referência estruturado que possa agregar valor e auxiliar outros profissionais e pesquisadores da comunidade de cibersegurança. 
 
-Acredito que a melhor forma de fixar um conhecimento técnico é explicando como cheguei até a solução. Por isso, encare esses relatórios (*writeups*) como o meu diário de bordo. Aqui eu registro a minha linha de raciocínio, as ferramentas que escolhi usar e como contornei os obstáculos em cada laboratório.
+Utilizo esses laboratórios como um ambiente controlado para testar ferramentas customizadas, validar novas vulnerabilidades e manter minhas habilidades ofensivas em constante atualização.
 
-### 🛠️ O que você vai encontrar aqui:
-- **Metodologia:** Meus processos de Enumeração e Reconhecimento.
-- **Exploração:** Como identifico vulnerabilidades e ganho o acesso inicial.
-- **Pós-Exploração:** Técnicas que utilizo para Escalonamento de Privilégios (Linux e Windows).
-- **Scripts e Ferramentas:** Automações em Python ou Bash que criei para facilitar a vida durante os desafios.
+### Foco Técnico das Documentações:
+- **Vetores de Acesso Inicial:** Técnicas de bypass, exploração de falhas em aplicações web e engenharia reversa.
+- **Desenvolvimento de Ferramentas:** Scripts próprios em Python/Bash e automação de tarefas de red teaming.
+- **Post-Exploitation:** Movimentação lateral, evasão de defesas e escalonamento de privilégios avançado em ambientes Linux e Windows (incluindo Active Directory).
+- **Análise Crítica:** Uma quebra detalhada do *porquê* um exploit funciona, indo além da simples execução de ferramentas automatizadas.
 
-### ⚠️ O que você NÃO vai encontrar aqui:
-- **Flags expostas.** Como regra ética da comunidade de InfoSec, não publico as respostas finais (flags). O objetivo deste repositório é compartilhar a *metodologia* e o raciocínio, não estragar a experiência de quem também está aprendendo.
+### Ética e Profissionalismo:
+Em respeito aos termos de serviço da plataforma e à ética da comunidade de InfoSec, **não publico flags (CTF answers)**. O valor real de um pentest está na metodologia, na linha de raciocínio e na capacidade de adaptação, não no resultado final isolado. 
 
-Sinta-se à vontade para explorar, usar minhas anotações como consulta para os seus estudos ou abrir uma *Issue* se quiser sugerir uma forma diferente e mais inteligente de explorar alguma máquina. Trocar ideias é a melhor parte da comunidade de segurança.
-
-Vamos aprender juntos! 🚀
+Sinta-se à vontade para utilizar minhas documentações como referência para suas próprias pesquisas ou abrir uma *Issue* para discutirmos diferentes abordagens e vetores para uma mesma máquina.
 
 ---
