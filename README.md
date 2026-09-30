@@ -18,4 +18,4 @@ Em respeito aos termos de serviço da plataforma e à ética da comunidade de In
 Sinta-se à vontade para utilizar minhas documentações como referência para suas próprias pesquisas ou abrir uma *Issue* para discutirmos diferentes abordagens e vetores para uma mesma máquina.
 
 ---
-*Acompanhe minhas estatísticas e laboratórios concluídos no meu [Perfil do TryHackMe](LINK_PARA_O_SEU_PERFIL).*
+*Acompanhe minhas estatísticas e laboratórios concluídos no meu [Perfil do TryHackMe](https://tryhackme.com/p/matheusdra2003).*
