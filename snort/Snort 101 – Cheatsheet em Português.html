@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Snort 101 – Cheatsheet em Português</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fdeaea;--card:#fff;--ink:#1c2541;--mut:#5a6478;--code-bg:#f3f4f8;--code:#1c2541;--acc:#e0555a;--dark:#4f6177;--line:#e3d3d3;
+--c-action:#d93a3a;--c-proto:#0aa5b8;--c-ip:#e07a2f;--c-opt:#8a4fd1;--c-ok:#1f9d6b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171b26;--card:#212737;--ink:#eef0f6;--mut:#a3adc2;--code-bg:#141824;--code:#e6e9f2;--dark:#2c3547;--line:#323b50;--acc:#ff7a7f;--c-action:#ff6b6b;--c-proto:#3fd0e0;--c-ip:#ffa65c;--c-opt:#b98cf5;--c-ok:#4fd6a0}}
+:root[data-theme="dark"]{--bg:#171b26;--card:#212737;--ink:#eef0f6;--mut:#a3adc2;--code-bg:#141824;--code:#e6e9f2;--dark:#2c3547;--line:#323b50;--acc:#ff7a7f;--c-action:#ff6b6b;--c-proto:#3fd0e0;--c-ip:#ffa65c;--c-opt:#b98cf5;--c-ok:#4fd6a0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:clamp(2.4rem,8vw,4rem);margin:0;letter-spacing:-1px}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin:4px 0 24px}
+h2{font-size:1.5rem;margin:36px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h3{margin:0 0 10px;font-size:1.15rem;color:var(--acc)}
+.it{margin:0 0 12px}
+.it b{display:block;font-size:.92rem}
+code,pre{font-family:ui-monospace,Menlo,Consolas,monospace}
+code{display:block;background:var(--code-bg);color:var(--code);padding:5px 8px;border-radius:6px;font-size:.8rem;margin-top:3px;overflow-x:auto;white-space:pre}
+.note{font-size:.82rem;color:var(--mut)}
+.blocks{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.blk{padding:8px 10px;border-radius:8px;color:#1c2541;font-weight:600;font-size:.82rem;text-align:center}
+.red{background:#ef8a85}.yel{background:#f5cf47}.blu{background:#59b8f2}
+pre.rule{background:#16181d;color:#f1f1f1;padding:14px;border-radius:10px;overflow-x:auto;font-size:.85rem;line-height:1.6;margin:10px 0}
+.a{color:#ff5b5b}.p{color:#3fd0e0}.i{color:#ffa65c}.o{color:#b98cf5}.g{color:#4fd6a0}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--dark);color:#fff}
+td:nth-child(2){font-family:ui-monospace,Menlo,monospace;font-weight:700}
+.grp{font-weight:700;color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>SNORT <span>101</span></h1>
+<p class="sub">Cheatsheet em português. Comandos, flags e opções de regra ficam em inglês (é como você vai digitar); só as explicações foram traduzidas. Base: TryHackMe – tryhackme.com/room/snort</p>
+
+<div class="grid" id="g1"></div>
+
+<h2>Snort Rule Breakdown</h2>
+<p>Uma regra do Snort tem duas partes lógicas:</p>
+<div class="grid">
+ <div class="card"><h3>Rule Header</h3><p>Informações de rede: <b>action</b> (ação), <b>protocol</b> (protocolo), IP e porta de origem e destino, e a direção do tráfego.</p>
+  <div class="blocks">
+   <div class="blk yel">Action</div><div class="blk blu">Protocol</div><div class="blk red">Source IP</div><div class="blk yel">Source Port</div><div class="blk red">Direction</div><div class="blk blu">Destination IP</div><div class="blk yel">Destination Port</div>
+  </div></div>
+ <div class="card"><h3>Rule Options</h3><p>Detalhes da investigação do pacote: mensagem, referência, flow e conteúdo.</p>
+  <div class="blocks"><div class="blk red">General Rule Options</div><div class="blk yel">Payload Detection Rule Options</div><div class="blk blu">Non-Payload Detection Rule Options</div><div class="blk yel">Post-Detection Rule Options</div></div></div>
+</div>
+
+<h2>Regra de exemplo</h2>
+<p>Regra de alerta para detectar uma possível “Directory Traversal Attempt” (tentativa de percorrer diretórios).</p>
+<pre class="rule"><span class="a">alert</span> <span class="p">tcp</span> <span class="i">$EXTERNAL_NET any -&gt; $HOME_NET $HTTP_PORTS</span> (
+<span class="o">msg:"Directory Traversal Attempt!";</span>
+<span class="p">flow:established;</span>
+nocase; content:"HTTP"; fast_pattern; content:"| 2E 2E 2F|"; content:"/..";
+<span class="g">session:all;</span>
+<span class="o">reference:CVE,XXX;
+sid:100001; rev:1;)</span></pre>
+
+<h2>Referência dos campos</h2>
+<div class="tw"><table id="t"><thead><tr><th>Grupo</th><th>Keyword (usar na regra)</th><th>Campo</th><th>Descrição</th></tr></thead><tbody></tbody></table></div>
+</div>
+
+<script>
+var S=[
+["Global Commands",[
+["Exibir a versão","snort -V\nsnort -version"],
+["Não exibir o banner de versão","snort -q"],
+["Usar uma interface específica","snort -i eth0"]]],
+["Sniffer Mode",[
+["Modo verbose","snort -v"],
+["Exibir cabeçalhos da camada de enlace (link-layer)","snort -e"],
+["Exibir o payload (dados) do pacote","snort -d"],
+["Exibir os detalhes completos do pacote em HEX","snort -X"],
+["Uso de várias flags: exibe todos os detalhes do pacote","snort -eX"],
+["Capturar “N” pacotes","snort -v -n 10"]]],
+["Logger Mode",[
+["Caminho padrão dos logs","/var/log/snort"],
+["Usar um caminho de log alternativo","snort -v -l /home/username/Desktop"],
+["Gravar log em formato ASCII","snort -v -K ASCII"],
+["Ler arquivos de log do Snort","snort -v -r snort.log"],
+["Ler “N” pacotes","snort -v -r snort.log -n 10"],
+["Filtrar pacotes com Berkeley Packet Filters (BPF)","snort -v -r snort.log tcp\nsnort -v -r snort.log 'udp and port 53'"]]],
+["IDS/IPS Mode",[
+["Usar arquivo de configuração","snort -c /etc/snort/snort.conf"],
+["Testar a instância e o arquivo de configuração","snort -c /etc/snort/snort.conf -T"],
+["Desabilitar o logging","snort -c /etc/snort/snort.conf -N"],
+["Rodar o Snort em segundo plano","snort -c /etc/snort/snort.conf -D"],
+["Alert mode 1 | Sem saída","snort -c /etc/snort/snort.conf -v -A none"],
+["Alert mode 2 | Saída no console 1","snort -c /etc/snort/snort.conf -v -A console"],
+["Alert mode 2 | Saída no console 2","snort -c /etc/snort/snort.conf -v -A cmg"],
+["Alert mode 3 | Saída em arquivo 1","snort -c /etc/snort/snort.conf -v -A fast"],
+["Alert mode 3 | Saída em arquivo 2","snort -c /etc/snort/snort.conf -v -A full"],
+["Usar regras sem arquivo de configuração","snort -c /etc/snort/rules/local.rules -v -A console"]]],
+["PCAP Processing",[
+["Processar um único arquivo pcap","snort -c /etc/snort/snort.conf -q -r file.pcap -A console"],
+["Processar vários arquivos pcap","snort -c /etc/snort/snort.conf -q --pcap-list=\"file1.pcap file2.pcap\" -A console"],
+["Processar todos os pcaps de uma pasta","snort -c /etc/snort/snort.conf -q --pcap-dir=/home/pcap-folder -A console"],
+["Mostrar o nome do pcap processado","snort -c /etc/snort/snort.conf -q --pcap-list=\"file1.pcap file2.pcap\" -A console --pcap-show"]]]
+];
+var g=document.getElementById('g1'),h='';
+S.forEach(function(s){h+='<div class="card"><h3>'+s[0]+'</h3>';
+ s[1].forEach(function(i){h+='<div class="it"><b>'+i[0]+'</b><code>'+i[1].replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</code></div>'});
+ h+='</div>'});
+g.innerHTML=h+'<div class="card"><p class="note">Dica: no Snort, a flag <b>-A</b> define o modo de alerta e <b>-c</b> aponta para a configuração. Nos comandos acima, use <b>snort</b> em minúsculas (é o nome real do binário no Linux).</p></div>';
+
+var R=[
+["Rule Header","Action","alert","Ação: diz ao Snort o que fazer quando a regra casar."],
+["","Protocol","tcp","Protocolo a ser analisado. Suportados: TCP, UDP, ICMP, IP."],
+["","Source IP","$EXTERNAL_NET","Endereços IP de origem."],
+["","Source Port","any","Portas de origem."],
+["","Direction","->","Operador de direção. Indica a orientação do tráfego."],
+["","Destination IP","$HOME_NET","Endereços IP de destino."],
+["","Destination Port","$HTTP_PORTS","Portas de destino."],
+["Rule Options – General","Message","msg","Mensagem exibida quando a regra casa."],
+["","Reference","reference","Informação adicional ou referência sobre a regra."],
+["","Rule id","sid","Número único da regra."],
+["","Revision info","rev","Informação de revisão da regra."],
+["Rule Options – Non-Payload","Flow","flow","Direção do fluxo TCP."],
+["Rule Options – Payload Detection","Nocase","nocase","Desativa a diferenciação de maiúsculas/minúsculas para melhorar o casamento do content."],
+["","Content","content","Filtra os dados do payload e procura um casamento exato."],
+["","Fast-pattern","fast-pattern","Prioriza a busca de conteúdo para acelerar a busca no payload. Obrigatório ao usar várias opções “content”."],
+["Rule Options – Post-Detection","Session","session","Extrai dados do usuário de sessões TCP."]];
+var b=document.querySelector('#t tbody'),x='';
+R.forEach(function(r){x+='<tr><td class="grp">'+r[0]+'</td><td>'+r[2]+'</td><td>'+r[1]+'</td><td>'+r[3]+'</td></tr>'});
+b.innerHTML=x;
+</script>
+</body>
+</html>

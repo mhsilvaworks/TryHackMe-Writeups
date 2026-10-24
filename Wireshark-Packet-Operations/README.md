@@ -45,4 +45,8 @@ Neste laboratório específico, o objetivo não foi extrair arquivos (como execu
 Para melhorar a segurança e dificultar a análise do nosso tráfego por terceiros:
 * **Desativar protocolos barulhentos:** Protocolos como o LLMNR costumam gerar muito tráfego em redes Windows e podem ser usados para ataques de envenenamento (Poisoning/Spoofing). Devem ser desativados via GPO.
 * **Criptografia Padrão:** O fato de conseguirmos ler a versão exata do servidor IIS em texto claro reforça a necessidade de usar HTTPS/TLS para mascarar cabeçalhos HTTP e impedir vazamento de dados.
+<<<<<<< HEAD
 * **Monitoramento e Alertas:** Configurar o SIEM para alertar sobre volumes anômalos de consultas DNS ou tráfego HTTP em portas não convencionais, o que pode indicar exfiltração de dados ou Command and Control (C2).
+=======
+* **Monitoramento e Alertas:** Configurar o SIEM para alertar sobre volumes anômalos de consultas DNS ou tráfego HTTP em portas não convencionais, o que pode indicar exfiltração de dados ou Command and Control (C2).
+>>>>>>> 78786b38578e8a03901c4ef9796d8286993807c3
