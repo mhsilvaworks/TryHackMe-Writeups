@@ -31,11 +31,10 @@ Principais conceitos:
 - Conceito de Business Email Compromise (BEC).
 
 **O que aprendi:**  
-Aprendi que não é suficiente analisar apenas o texto que aparece na mensagem. É importante verificar outras informações do e-mail e procurar inconsistências que possam indicar uma tentativa de fraude.
+Aprendi que não é suficiente analisar apenas o texto que aparece na mensagem. É importante verificar outras informações do e-mail e procurar inconsistências que possam indicar uma tentativa de fraude, como o email de origem.
 
 **Minha experiência na sala:**  
-[Adicione aqui o que você achou mais interessante, uma questão que resolveu ou alguma dificuldade que encontrou.]
-
+Durante o desenvolvimento desse laboratório consegui entender a importancia do meu aprendizado em redes, com foco em IP para conseguir diferenciar IPs externos e internos, mas também o risco de e-mails com ips de origem loopback.
 ---
 
 ### 2. Phishing Emails in Action
@@ -56,8 +55,7 @@ Principais conceitos:
 Entendi melhor como um e-mail malicioso pode ser construído para parecer verdadeiro. Também percebi a importância de conferir os links e o contexto da mensagem antes de confiar no conteúdo recebido.
 
 **Minha experiência na sala:**  
-[Descreva um exemplo analisado e o sinal que ajudou a identificar a tentativa de phishing.]
-
+Durante o laboratório foi importante entender o riscond de técnicas como endereço de e-mail falsificado, que  busca imitar um serviço confiável para obter credibilidade imediata, encurtamento de URL, que utiliza serviços de redirecionamento para ocultar o verdadeiro destino de um link HTML personalizado imitando imagens corporativas legítimas para criar uma sensação de autenticidade.
 ---
 
 ### 3. Phishing Analysis Tools
@@ -78,7 +76,7 @@ Principais conceitos e ferramentas:
 Aprendi que as ferramentas de análise ajudam a reunir evidências e facilitam a investigação. Entretanto, os resultados precisam ser interpretados em conjunto com o contexto da mensagem, pois um único indicador nem sempre é suficiente para confirmar que um e-mail é malicioso.
 
 **Minha experiência na sala:**  
-[Informe quais ferramentas você utilizou, o que conseguiu identificar e qual foi a parte mais difícil.]
+Foi importante a ulização do PhishTool, que ajuda a automatizar grande parte do trabalho manual envolvido na análise de e-mails suspeitos. 
 
 ---
 
@@ -100,7 +98,7 @@ Principais conceitos:
 Entendi que a prevenção depende de diferentes mecanismos de segurança. A autenticação de e-mails ajuda a dificultar determinados tipos de falsificação, enquanto a análise das mensagens e a conscientização dos usuários continuam sendo importantes.
 
 **Minha experiência na sala:**  
-[Adicione o conceito que você teve mais dificuldade para entender ou um exemplo que ajudou a fixar o conteúdo.]
+Utilização de ferramentas com foco em filtragem de pacotes para entender a quantidade de pacotes referente a cada tipo de porta. 
 
 ---
 
@@ -142,7 +140,7 @@ Pontos importantes:
 Entendi a importância de comparar os indicadores encontrados em diferentes mensagens. Quando várias evidências apontam para padrões semelhantes, elas podem ajudar a compreender melhor o funcionamento de uma campanha de phishing.
 
 **Minha experiência na sala:**  
-[Descreva os padrões que você identificou, as dificuldades encontradas e o que utilizou para resolver o desafio.]
+Durante esse modulo consegui entender a importancia do virus total e aprendi também que ele pode ter diferente tipos de ameaças que fazem a mesma coisa.
 
 ---
 
@@ -163,9 +161,6 @@ Principais assuntos para revisar:
 **O que aprendi:**  
 A revisão ajuda a conectar os diferentes assuntos do módulo e a perceber como cada etapa contribui para uma análise mais completa de um possível ataque.
 
-**Minha experiência na sala:**  
-[Registre os conceitos que você conseguiu revisar e os assuntos que ainda precisa estudar melhor.]
-
 ---
 
 ### 8. Phishing Unfolding
@@ -185,8 +180,7 @@ Em uma investigação desse tipo, algumas atividades importantes são:
 Compreendi a importância de analisar os eventos em conjunto, manter as evidências organizadas e documentar as conclusões durante uma investigação. Esse tipo de atividade também ajuda a entender como os conhecimentos de análise de phishing podem ser aplicados em um contexto de SOC (*Security Operations Center*).
 
 **Minha experiência na sala:**  
-[Descreva como você conduziu a investigação, quais evidências foram importantes e como interpretou os alertas apresentados.]
-
+Durante o laboratório, enfrentamos um ataque de phishing que resultou em exfiltração de dados, o qual conseguimos descobrir utilizando o SIEM para monitorar os logs. Gostei muito do laboratório porque ele mostra que um evento aparentemente inofensivo, como um e-mail catch-all [ou "evento de fachada"], pode, na realidade, abrir grandes vulnerabilidades. Nesse cenário, o próprio CEO acaba caindo no phishing, o que resulta na exfiltração dos dados e expõe diversos outros problemas na segurança da empresa, como a falta de treinamento dos funcionários e a não aplicação do princípio do privilégio mínimo.
 ---
 
 ## 🛠️ Principais conhecimentos desenvolvidos
